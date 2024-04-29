@@ -12,13 +12,10 @@ terraform {
 }
 
 module "vpc" {
-  source = "./../modules/vpc"
-
-  name             = var.name
-  rds              = var.rds
-  environment      = var.environment
-  vpc_id           = module.vpc.vpc_id
-  database-subnets = module.vpc.database_subnets
+  source      = "./../modules/vpc"
+  environment = var.environment
+  name        = var.name
+  vpc         = var.vpc
 }
 
 

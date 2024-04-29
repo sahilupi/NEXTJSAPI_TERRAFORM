@@ -1,0 +1,63 @@
+name: "Terraform Pipeline with GitHub Actions"
+ 
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  terraform:
+    name: "Terraform pipeline"
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout the repository to the runner
+        uses: actions/checkout@v2
+ 
+      - name: Setup Terraform with specified version on the runner
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+    
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          # aws-session-token: ${{secrets.AWS_SESSION_TOKEN}}
+          aws-region: ${{env.aws-region}}
+          
+      - name: Terraform init and validate
+        run: |
+          terraform init
+          terraform validate
+
+      - name: Terraform plan
+        run: |
+          terraform plan -var-file="terraform.tfvars"
+
+      - name: Terraform apply
+        run: |
+          terraform apply -var-file="terraform.tfvars" -auto-approve
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,7 +12,7 @@ terraform {
 }
 
 module "vpc" {
-  source      = "../modules/vpc"
+  source      = "../module/vpc"
   environment = var.environment
   name        = var.name
   vpc         = var.vpc

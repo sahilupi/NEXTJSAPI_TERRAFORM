@@ -63,7 +63,7 @@ resource "aws_route_table_association" "public_rt_tb_association" {
 # Elastic_ip for nat
 
 resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_eip.nat.id
+  allocation_id = aws_nat_gateway.nat.id
   subnet_id     = element(aws_subnet.public_subnets.*.0)
    depends_on = [aws_internet_gateway.ig]
 

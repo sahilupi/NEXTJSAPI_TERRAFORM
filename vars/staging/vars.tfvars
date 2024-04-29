@@ -4,7 +4,7 @@ environment = "staging"
 
 
 vpc = {
-  vpc_cidr = 10.0.0.0/16
+  vpc_cidr = "10.0.0.0/16"
  availability_zones  = ["ap-south-1"]
  enable_dns_support      = "true"
  enable_dns_hostnames    = "true"

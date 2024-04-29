@@ -121,7 +121,7 @@ resource "aws_route_table_association" "app_rt_tb_association" {
 #database subnets
 resource "aws_subnet" "database_subnets" {
   depends_on = [
-    aws_vpc.vpc,
+    aws_vpc.vpc
   ]
 
   vpc_id                  = aws_vpc.vpc.id

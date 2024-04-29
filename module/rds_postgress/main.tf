@@ -42,14 +42,42 @@ resource "aws_db_instance" "database" {
    instance_class = var.rds.instance_class
    allocated_storage = var.rds.allocated_storage
    max_allocated_storage = var.rds.max_allocated_storage
-   storage_encrypted = va.rds.storage_encrypted
+   storage_encrypted = var.rds.storage_encrypted
+   port = var.rds.port
+   username   = var.rds.username
+   manage_master_user_password = var.rds.manage_master_user_password
+   multi_az = var.rds.multi_az
+   vpc_security_group_ids = [aws_security_group.database-sg.id]
+   enabled_cloudwatch_logs_exports = var.rds.enabled_cloudwatch_logs_exports
+   backup_retention_period   = var.rds.backup_retention_period
+   backup_window = var.rds.backup_window
+   maintenance_window = var.rds.maintenance_window
+   skip_final_snapshot = var.rds.skip_final_snapshot
+  deletion_protection = var.rds.deletion_protection
+  performance_insights_enabled = var.rds.performance_insights_enabled
+  performance_insights_retention_period = var.rds.performance_insights_retention_period
+  monitoring_interval  = var.rds.mnitoring_interval
+  publicly_accessible  = var.rds.publicly_accessible
 
-
-
-
-
-
+  
+  tags = {
+    Name        = "${local.name_database}"
+    Environment = var.environment
+  }
 }
+
+
+  
+
+  
+
+
+
+
+
+
+
+
 
 
 
